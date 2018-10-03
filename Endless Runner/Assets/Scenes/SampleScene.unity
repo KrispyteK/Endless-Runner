@@ -432,7 +432,7 @@ MonoBehaviour:
   Parent: {fileID: 2082194563}
   SpringForce: 15
   SpringDamping: 0.01
-  FlapTime: 0.5
+  FlapTime: 0.2
   FlapForce: -300
   FlapUpwardForce: 3000
   RotationForce: -150
@@ -513,7 +513,7 @@ MonoBehaviour:
     MinHeight: 5
     MaxHeight: 50
     Chance: 0.5
-  SpawnRate: 1
+  SpawnRate: 0.25
 --- !u!1 &1999988926
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 519420028}
-  CameraLag: 0.8
+  CameraLag: 0.05
 --- !u!114 &2082194567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +830,7 @@ MonoBehaviour:
   Parent: {fileID: 2082194563}
   SpringForce: 15
   SpringDamping: 0.01
-  FlapTime: 0.5
+  FlapTime: 0.2
   FlapForce: 300
   FlapUpwardForce: 3000
   RotationForce: 150

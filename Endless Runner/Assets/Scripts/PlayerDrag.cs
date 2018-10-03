@@ -12,7 +12,6 @@ public class PlayerDrag : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-        print(rb.velocity);
         rb.AddForce(-rb.velocity * new Vector2(SideWaysDrag, 0));
 	}
 }

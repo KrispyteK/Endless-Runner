@@ -25,11 +25,11 @@ public class ObstacleSpawner : MonoBehaviour {
             var obstacle = ChooseObstacle();
 
             if (obstacle != null) {
-                var spawnPosition = Player.transform.position + new Vector3(0, Camera.main.orthographicSize, 0);
+                var spawnPosition = Player.transform.position + new Vector3((Random.Range(0f,1f) * Camera.main.orthographicSize - Camera.main.orthographicSize/2) * 2f, Camera.main.orthographicSize, 0);
                 var hit = Physics2D.CircleCast(spawnPosition, 2f, Vector3.zero);
 
                 if (hit.collider == null) {
-                    var spawned = Instantiate(obstacle.Object, spawnPosition, Quaternion.Euler(0, 0, 0));
+                    Instantiate(obstacle.Object, spawnPosition, Quaternion.Euler(0, 0, 0));
                 }
             }
 
