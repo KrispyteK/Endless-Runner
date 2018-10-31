@@ -13,7 +13,14 @@ public class Panner : MonoBehaviour {
 
 	void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        width = Left.GetComponent<Renderer>().bounds.size.x;
+
+        var renderer = Left.GetComponent<Renderer>();
+
+        if (renderer != null) {
+            width = renderer.bounds.size.x;
+        } else {
+            width = Left.GetComponent<BoxCollider2D>().bounds.size.x;
+        }
     }
 	
 	void Update () {

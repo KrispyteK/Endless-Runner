@@ -6,22 +6,19 @@ public class ObstacleMovement : MonoBehaviour {
 
     public float Speed = 1f;
     public GameObject Sprite;
+    public float SpriteWidth;
 
     private GameManager gameManager;
-    private float spriteWidth;
-    private float startOffset;
 
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        spriteWidth = Sprite.GetComponent<Renderer>().bounds.size.x;
+        SpriteWidth = Sprite.GetComponent<Renderer>().bounds.size.x;
 
-        startOffset = transform.position.x + gameManager.DistanceTravelled;
+        transform.position = transform.position + new Vector3(SpriteWidth, 0, 0);
     }
 	
 	void Update () {
-        //transform.position = new Vector2((-(gameManager.DistanceTravelled - startOffset) * Speed), transform.position.y);
-
-        if (transform.position.x < (-Camera.main.orthographicSize - spriteWidth + gameManager.DistanceTravelled)) {
+        if (transform.position.x < (Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).x - SpriteWidth)) {
             Destroy(gameObject);
         }
     }
