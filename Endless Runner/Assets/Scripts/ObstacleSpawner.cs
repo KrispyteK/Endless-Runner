@@ -4,59 +4,45 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour {
 
-    public GameObject Player;
+    public GameObject World;
     public Obstacle[] Obstacles;
-    public float SpawnRate;
-    
+
+    private GameManager gameManager;
+
     [System.Serializable]
-    public class Obstacle {
+    public struct Obstacle {
         public GameObject Object;
-        public float MinHeight;
-        public float MaxHeight;
-        public float Chance;
-    }
-	
-    void Start () {
-        StartCoroutine("SpawnObjects");
-    }
-
-    IEnumerator SpawnObjects () {
-        while (true) {
-            var obstacle = ChooseObstacle();
-
-            if (obstacle != null) {
-                var spawnPosition = Player.transform.position + new Vector3((Random.Range(0f,1f) * Camera.main.orthographicSize - Camera.main.orthographicSize/2) * 2f, Camera.main.orthographicSize, 0);
-                var hit = Physics2D.CircleCast(spawnPosition, 2f, Vector3.zero);
-
-                if (hit.collider == null) {
-                    Instantiate(obstacle.Object, spawnPosition, Quaternion.Euler(0, 0, 0));
-                }
-            }
-
-            yield return new WaitForSeconds(SpawnRate);
-        }
+        public float SpawnFrequency;
+        public float FrequencyVariance;
+        public float GameStartSpawnDelay;
+        public float SideToSideVariance;
+        public bool SpawnAtStart;
+        public int SpawnAtStartAmount;
     }
 
-    Obstacle ChooseObstacle () {
-        var height = Player.transform.position.y;
-        var comparer = Random.Range(0f,1f);
-        var highestChance = 0.0f;
-        Obstacle result = null;
-        Obstacle highestChanceObstacle = null;
+	void Start () {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         foreach (var o in Obstacles) {
-            if (height < o.MinHeight || height > o.MaxHeight) continue;
+            StartCoroutine(SpawnObstacleBasedOnTime(o));
+        }
+    }
 
-            if (comparer < o.Chance) {
-                result = o;
-            }
+    IEnumerator SpawnObstacleBasedOnTime (Obstacle obstacle) {
+        yield return new WaitForSeconds(obstacle.GameStartSpawnDelay);
 
-            if (o.Chance > highestChance) {
-                highestChance = o.Chance;
-                highestChanceObstacle = o;
+        if (obstacle.SpawnAtStart) {
+            for (int i = 0; i < obstacle.SpawnAtStartAmount; i++) {
+                var spawned = Instantiate(obstacle.Object, new Vector2(Random.Range(-1f, 1f) * Camera.main.orthographicSize * 4, 0), Quaternion.Euler(0, 0, 0));
+                spawned.transform.parent = World.transform;
             }
         }
 
-        return result ?? highestChanceObstacle;
+        while(true) {
+            var spawned = Instantiate(obstacle.Object, new Vector2(gameManager.DistanceTravelled + Camera.main.orthographicSize * 6 + Random.Range(0f, obstacle.SideToSideVariance), 0), Quaternion.Euler(0,0,0));
+            spawned.transform.parent = World.transform;
+
+            yield return new WaitForSeconds(obstacle.SpawnFrequency + Random.Range(-obstacle.FrequencyVariance, obstacle.FrequencyVariance));
+        }
     }
 }
