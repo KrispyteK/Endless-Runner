@@ -81,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dc6ae36516c1c4f8b615b0d09646b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 0
+  SpawnWithOffset: 1
   Sprite: {fileID: 1898924026460770}
   SpriteWidth: 0
 --- !u!212 &212298354458596270

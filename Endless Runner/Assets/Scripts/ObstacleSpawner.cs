@@ -18,6 +18,8 @@ public class ObstacleSpawner : MonoBehaviour {
         public float SideToSideVariance;
         public bool SpawnAtStart;
         public int SpawnAtStartAmount;
+        public float MinHeight;
+        public float MaxHeight;
     }
 
 	void Start () {
@@ -33,7 +35,12 @@ public class ObstacleSpawner : MonoBehaviour {
 
         if (obstacle.SpawnAtStart) {
             for (int i = 0; i < obstacle.SpawnAtStartAmount; i++) {
-                var spawned = Instantiate(obstacle.Object, new Vector2(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-1f,1.5f), 0, 0)).x, 0), Quaternion.Euler(0, 0, 0));
+                var spawned = Instantiate(
+                        obstacle.Object, 
+                        new Vector2(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-1f,1.5f), Random.Range(obstacle.MinHeight, obstacle.MaxHeight), 0)).x, 0), 
+                        Quaternion.Euler(0, 0, 0)
+                    );
+
                 spawned.transform.parent = World.transform;
             }
         }
@@ -46,8 +53,9 @@ public class ObstacleSpawner : MonoBehaviour {
                 );
 
             spawned.transform.position = new Vector2(
-                Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x + Random.Range(0f, obstacle.SideToSideVariance),
-                0);
+                    Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x + Random.Range(0f, obstacle.SideToSideVariance),
+                    Random.Range(obstacle.MinHeight, obstacle.MaxHeight)
+                );
             spawned.transform.parent = World.transform;
 
             yield return new WaitForSeconds(obstacle.SpawnFrequency + Random.Range(-obstacle.FrequencyVariance, obstacle.FrequencyVariance));

@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public float MovementSpeed = 2f;
-    public float DistanceTravelled = 0f;
+    public float RecoverSpeed = 0.1f;
+    [HideInInspector] public float DistanceTravelled = 0f;
+    [HideInInspector] public float HitDistance = 0f;
 
     public GUIStyle GUIStyle;
 
@@ -13,13 +15,17 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         DistanceTravelled += MovementSpeed * Time.deltaTime;
+
+        if (HitDistance > 0) {
+            HitDistance = Mathf.Clamp(HitDistance - RecoverSpeed * Time.deltaTime, 0, Mathf.Infinity);
+        }
     }
 
     void OnGUI() {
-        GUI.Label(new Rect(Screen.width - 300, 100, 0, 0), "DISTANCE: " + DistanceTravelled.ToString("F2"), GUIStyle);
+        GUI.Label(new Rect(Screen.width - 300, 100, 0, 0), "SCORE: " + Mathf.Floor(DistanceTravelled), GUIStyle);
     }
 }

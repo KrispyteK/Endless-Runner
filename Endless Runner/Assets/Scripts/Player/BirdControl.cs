@@ -18,7 +18,7 @@ public class BirdControl : MonoBehaviour {
         rb.AddForce(new Vector2(0, Input.GetAxis("Vertical") * Force));
 
         var pos = transform.position;
-        pos.x = gameManager.DistanceTravelled;
+        pos.x = gameManager.DistanceTravelled - gameManager.HitDistance;
 
         transform.position = pos;
     }
