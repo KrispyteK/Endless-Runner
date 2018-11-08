@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public float RecoverSpeed = 0.1f;
     [HideInInspector] public float DistanceTravelled = 0f;
     [HideInInspector] public float HitDistance = 0f;
+    [HideInInspector] public bool WasHit = false;
 
     public GUIStyle GUIStyle;
 
@@ -27,5 +28,27 @@ public class GameManager : MonoBehaviour {
 
     void OnGUI() {
         GUI.Label(new Rect(Screen.width - 300, 100, 0, 0), "SCORE: " + Mathf.Floor(DistanceTravelled), GUIStyle);
+    }
+
+    public void MoveBack(float distance) {
+        if (!WasHit) {
+            WasHit = true;
+
+            StartCoroutine(affectDistanceTravelled(distance));
+        }
+    }
+
+    IEnumerator affectDistanceTravelled(float distance) {
+        float affectedDistance = 0f;
+
+        while (affectedDistance < distance) {
+            var change = Time.deltaTime * distance;
+
+            affectedDistance += change;
+            HitDistance += change;
+            yield return null;
+        }
+
+        WasHit = false;
     }
 }

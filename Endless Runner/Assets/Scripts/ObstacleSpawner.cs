@@ -7,8 +7,6 @@ public class ObstacleSpawner : MonoBehaviour {
     public GameObject World;
     public Obstacle[] Obstacles;
 
-    private GameManager gameManager;
-
     [System.Serializable]
     public struct Obstacle {
         public GameObject Object;
@@ -20,11 +18,11 @@ public class ObstacleSpawner : MonoBehaviour {
         public int SpawnAtStartAmount;
         public float MinHeight;
         public float MaxHeight;
+        public float MinScaleDeviation;
+        public float MaxScaleDeviation;
     }
 
 	void Start () {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
         foreach (var o in Obstacles) {
             StartCoroutine(SpawnObstacleBasedOnTime(o));
         }
@@ -57,6 +55,7 @@ public class ObstacleSpawner : MonoBehaviour {
                     Random.Range(obstacle.MinHeight, obstacle.MaxHeight)
                 );
             spawned.transform.parent = World.transform;
+            spawned.transform.localScale *= 1 + Random.Range(-obstacle.MinScaleDeviation, obstacle.MaxScaleDeviation);
 
             yield return new WaitForSeconds(obstacle.SpawnFrequency + Random.Range(-obstacle.FrequencyVariance, obstacle.FrequencyVariance));
         }
