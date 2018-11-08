@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50079521668002966}
   - component: {fileID: 232663826672956170}
   - component: {fileID: 114163857149778572}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BeesNest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

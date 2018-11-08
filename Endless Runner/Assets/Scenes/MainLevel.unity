@@ -145,6 +145,7 @@ MonoBehaviour:
   RecoverSpeed: 0.5
   DistanceTravelled: 0
   HitDistance: 0
+  WasHit: 0
   GUIStyle:
     m_Name: 
     m_Normal:
@@ -247,6 +248,8 @@ MonoBehaviour:
     SpawnAtStartAmount: 5
     MinHeight: 0
     MaxHeight: 0
+    MinScale: 1
+    MaxScale: 1
   - Object: {fileID: 1675306592632448, guid: c654ca95bb8887546bb53fe9d8940e5d, type: 2}
     SpawnFrequency: 3
     FrequencyVariance: 0.5
@@ -256,6 +259,8 @@ MonoBehaviour:
     SpawnAtStartAmount: 5
     MinHeight: 0
     MaxHeight: 0
+    MinScale: 1
+    MaxScale: 1
   - Object: {fileID: 1957143307750556, guid: 9a7a468604565c344bd7cf82148430f8, type: 2}
     SpawnFrequency: 4
     FrequencyVariance: 1
@@ -265,6 +270,8 @@ MonoBehaviour:
     SpawnAtStartAmount: 3
     MinHeight: 0
     MaxHeight: 0
+    MinScale: 1
+    MaxScale: 1
   - Object: {fileID: 1929605184802086, guid: b0d179b74d1c6834297202569f111274, type: 2}
     SpawnFrequency: 4
     FrequencyVariance: 1
@@ -274,15 +281,41 @@ MonoBehaviour:
     SpawnAtStartAmount: 3
     MinHeight: 0
     MaxHeight: 0
+    MinScale: 1
+    MaxScale: 1
   - Object: {fileID: 1253179240435672, guid: b86607bdef8028f43bbdcad6e380d5c0, type: 2}
     SpawnFrequency: 4
     FrequencyVariance: 1
     GameStartSpawnDelay: 4
     SideToSideVariance: 5
-    SpawnAtStart: 1
+    SpawnAtStart: 0
     SpawnAtStartAmount: 3
     MinHeight: 0
     MaxHeight: 0
+    MinScale: 1
+    MaxScale: 1
+  - Object: {fileID: 1382744956576984, guid: 68680b5e8d80e9a4a8569f65fb650f64, type: 2}
+    SpawnFrequency: 4
+    FrequencyVariance: 1
+    GameStartSpawnDelay: 4
+    SideToSideVariance: 5
+    SpawnAtStart: 0
+    SpawnAtStartAmount: 3
+    MinHeight: -4.5
+    MaxHeight: -4.1
+    MinScale: 1
+    MaxScale: 1.5
+  - Object: {fileID: 1924068408389194, guid: 0a1a7c0656700d04ebf16470e76803bb, type: 2}
+    SpawnFrequency: 4
+    FrequencyVariance: 1
+    GameStartSpawnDelay: 4
+    SideToSideVariance: 5
+    SpawnAtStart: 0
+    SpawnAtStartAmount: 3
+    MinHeight: 2
+    MaxHeight: 5
+    MinScale: 0
+    MaxScale: 0
 --- !u!1 &375851709
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +424,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: adb8e3d9267eb654ea3a0bb402a9a2db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -466,7 +499,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: adb8e3d9267eb654ea3a0bb402a9a2db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -943,7 +976,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: adb8e3d9267eb654ea3a0bb402a9a2db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -965,7 +998,8 @@ GameObject:
   - component: {fileID: 1212705475}
   - component: {fileID: 1212705474}
   - component: {fileID: 1212705473}
-  m_Layer: 0
+  - component: {fileID: 1212705476}
+  m_Layer: 10
   m_Name: FrontWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1058,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300004, guid: 068524f54977a3b44825652b1801b926, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1049,6 +1083,17 @@ Transform:
   m_Father: {fileID: 1619251248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1212705476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212705472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d50c626def6058469c426eacda87ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282152882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1273,8 @@ GameObject:
   - component: {fileID: 1575005094}
   - component: {fileID: 1575005093}
   - component: {fileID: 1575005092}
-  m_Layer: 0
+  - component: {fileID: 1575005095}
+  m_Layer: 10
   m_Name: BackWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1287,7 +1333,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300006, guid: 068524f54977a3b44825652b1801b926, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1312,6 +1358,17 @@ Transform:
   m_Father: {fileID: 1619251248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1575005095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1575005091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d50c626def6058469c426eacda87ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1619251247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1380,8 @@ GameObject:
   - component: {fileID: 1619251249}
   - component: {fileID: 1619251250}
   - component: {fileID: 1619251251}
-  m_Layer: 0
+  - component: {fileID: 1619251252}
+  m_Layer: 10
   m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1379,7 +1437,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300002, guid: 068524f54977a3b44825652b1801b926, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1603,6 +1661,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationAmount: 1
+--- !u!114 &1619251252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619251247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d50c626def6058469c426eacda87ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639858557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1735,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: adb8e3d9267eb654ea3a0bb402a9a2db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1743,7 +1812,7 @@ GameObject:
   - component: {fileID: 1906694689}
   - component: {fileID: 1906694688}
   - component: {fileID: 1906694690}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

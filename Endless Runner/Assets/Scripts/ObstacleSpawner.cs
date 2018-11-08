@@ -18,8 +18,8 @@ public class ObstacleSpawner : MonoBehaviour {
         public int SpawnAtStartAmount;
         public float MinHeight;
         public float MaxHeight;
-        public float MinScaleDeviation;
-        public float MaxScaleDeviation;
+        public float MinScale;
+        public float MaxScale;
     }
 
 	void Start () {
@@ -55,7 +55,7 @@ public class ObstacleSpawner : MonoBehaviour {
                     Random.Range(obstacle.MinHeight, obstacle.MaxHeight)
                 );
             spawned.transform.parent = World.transform;
-            spawned.transform.localScale *= 1 + Random.Range(-obstacle.MinScaleDeviation, obstacle.MaxScaleDeviation);
+            spawned.transform.localScale *= Random.Range(obstacle.MinScale, obstacle.MaxScale);
 
             yield return new WaitForSeconds(obstacle.SpawnFrequency + Random.Range(-obstacle.FrequencyVariance, obstacle.FrequencyVariance));
         }
