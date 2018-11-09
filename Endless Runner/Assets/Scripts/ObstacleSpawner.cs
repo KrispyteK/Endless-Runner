@@ -22,26 +22,42 @@ public class ObstacleSpawner : MonoBehaviour {
         public float MaxScale;
     }
 
-	void Start () {
+    public void SpawnObstacles () {
         foreach (var o in Obstacles) {
             StartCoroutine(SpawnObstacleBasedOnTime(o));
+        }
+    }
+
+    void Start () {
+        foreach (var obstacle in Obstacles) {
+            if (obstacle.SpawnAtStart) {
+                for (int i = 0; i < obstacle.SpawnAtStartAmount; i++) {
+                    var spawned = Instantiate(
+                            obstacle.Object,
+                            new Vector2(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-1f, 1.5f), Random.Range(obstacle.MinHeight, obstacle.MaxHeight), 0)).x, 0),
+                            Quaternion.Euler(0, 0, 0)
+                        );
+
+                    spawned.transform.parent = World.transform;
+                }
+            }
         }
     }
 
     IEnumerator SpawnObstacleBasedOnTime (Obstacle obstacle) {
         yield return new WaitForSeconds(obstacle.GameStartSpawnDelay);
 
-        if (obstacle.SpawnAtStart) {
-            for (int i = 0; i < obstacle.SpawnAtStartAmount; i++) {
-                var spawned = Instantiate(
-                        obstacle.Object, 
-                        new Vector2(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-1f,1.5f), Random.Range(obstacle.MinHeight, obstacle.MaxHeight), 0)).x, 0), 
-                        Quaternion.Euler(0, 0, 0)
-                    );
+        //if (obstacle.SpawnAtStart) {
+        //    for (int i = 0; i < obstacle.SpawnAtStartAmount; i++) {
+        //        var spawned = Instantiate(
+        //                obstacle.Object, 
+        //                new Vector2(Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-1f,1.5f), Random.Range(obstacle.MinHeight, obstacle.MaxHeight), 0)).x, 0), 
+        //                Quaternion.Euler(0, 0, 0)
+        //            );
 
-                spawned.transform.parent = World.transform;
-            }
-        }
+        //        spawned.transform.parent = World.transform;
+        //    }
+        //}
 
         while(true) {
             var spawned = Instantiate(

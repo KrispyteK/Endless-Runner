@@ -8,10 +8,12 @@ public class ObstacleMovement : MonoBehaviour {
     public bool SpawnWithOffset = true;
     public GameObject Sprite;
 
+
     [HideInInspector] public float SpriteWidth;
+    private GameManager gameManager;
 
-
-    void Start () {
+    void Start() {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         SpriteWidth = Sprite.GetComponent<Renderer>().bounds.size.x;
 
         if (SpawnWithOffset) {
@@ -20,10 +22,12 @@ public class ObstacleMovement : MonoBehaviour {
     }
 	
 	void Update () {
-        transform.position = transform.position + new Vector3(-Speed * Time.deltaTime, 0, 0);
+        if (!gameManager.IsDead && gameManager.GameStarted) {
+            transform.position = transform.position + new Vector3(-Speed * Time.deltaTime, 0, 0);
 
-        if (transform.position.x < (Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).x - SpriteWidth)) {
-            Destroy(gameObject);
+            if (transform.position.x < (Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).x - SpriteWidth)) {
+                Destroy(gameObject);
+            }
         }
     }
 }
